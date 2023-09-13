@@ -517,7 +517,6 @@ setup-makefiles.sh
 このスクリプトは、makefileを生成するためにextract-files.shから呼び出される。
 
 FCM 或いは manifest.xml 或いは compatibility_matrix.device.xml
-これはHALマニフェストファイルであり、デバイスがサポートするHALとそのバージョンを指定します。 Androidはマニフェスト内のHALに従って対応するHALをロードします。 詳細は公式AOSPドキュメントを参照してください: https://source.android.com/docs/core/architecture/vintf? hl=zh-cn
-
+これはHALマニフェストファイルであり、デバイスがサポートするHALとそのバージョンを指定します。 Androidはマニフェスト内のHALに従って対応するHALをロードします。 詳細は公式AOSPドキュメントを参照してください: https://source.android.com/docs/core/architecture/vintf?hl=ja
 bootctrl および gpt-utils または mtk_plpath_utils
 これらのモジュールは、A/Bデバイスの非破壊アップグレードに必要である。詳細はAOSPの公式ドキュメントを参照されたい： https://source.android.com/docs/core/ota/ab
