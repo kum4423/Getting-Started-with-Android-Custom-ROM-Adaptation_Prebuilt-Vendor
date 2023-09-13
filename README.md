@@ -6,7 +6,8 @@ Getting Started with Android Custom ROM Adaptation - Prebuilt Vendor
 [<img src=""
      alt=""
      height="80">]()
-     
+
+---    
 Android Custom ROMの構築適応を始める - Prebuilt Vendor
 
 * 快速上手 Android Custom ROM 适配 - Prebuilt Vendor
@@ -63,7 +64,7 @@ Android Custom ROMの構築適応を始める - Prebuilt Vendor
             * logcat 日志中出现 linker 错误
             * logcat 日志中出现 Permission denied 错误
             * logcat 日志中出现 fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR) 错误
-
+---
 
 # Android Custom ROMの構築適応を始める - Prebuilt Vendor	
 
