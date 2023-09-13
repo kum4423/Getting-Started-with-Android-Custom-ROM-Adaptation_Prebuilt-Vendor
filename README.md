@@ -128,23 +128,31 @@ MIUIを抽出する
 
 IMSのようないくつかの機能を動作させるためには、ストックシステムにあるいくつかのファイルが必要なので、まずストックシステムを解凍する必要がある。
 下载解包工具	
+```
 git clone https://github.com/ShivamKumarJha/android_tools --depth=1	
-cd android_tools	
+cd android_tools
+```
 	
 初始化工具所需环境	
+```
 chmod +x setup.sh	
-sudo bash setup.sh	
+sudo bash setup.sh
+```
 	
 开始解包	
-./tools/rom_extract.sh MIUI_PACKAGE.zip	
+```
+./tools/rom_extract.sh MIUI_PACKAGE.zip
+```
 
 # 必要ファイルの抽出
 
 # vendorとodmの抽出
 
 prebuilt vendorなので、オリジナル・システムからvendor、odmイメージを抽出する必要がある。
+```
 unzip MIUI_PACKAGE.zip	
-./../android_tools/tools/Firmware_extractor/tools/update_payload_extractor/extract.py payload.bin --output_dir images/	
+./../android_tools/tools/Firmware_extractor/tools/update_payload_extractor/extract.py payload.bin --output_dir images/
+```
 
 次に、imagesディレクトリからvendor.imgとodm.imgをdevice/xiaomi/thym-prebuilt/にコピーする。
 
@@ -153,12 +161,16 @@ unzip MIUI_PACKAGE.zip
 
 適応プロセスの初期段階なので、適応プロセスを簡略化するために、prebuilt kernelを使用する。
 下载 magiskboot 用于解包 boot.img 以及 vendor_boot.img	
+```
 wget https://github.com/TeamWin/external_magisk-prebuilt/raw/android-12.1/prebuilt/magiskboot_x86	
-chmod a+x magiskboot_x86	
+chmod a+x magiskboot_x86
+```
 	
 解包 boot.img 以及 vendor_boot.img	
+```
 ./magiskboot_x86 unpack boot.img	
-./magiskboot_x86 unpack vendor_boot.img	
+./magiskboot_x86 unpack vendor_boot.img
+```
 
 次に、展開したkernel、dtb、dtbo.imgをdevice/xiaomi/thyme-prebuilt/にコピーする。
 
@@ -171,19 +183,22 @@ device treeを初期化し、recoveryをコンパイルしてkernelの可用性�
 # Android.mk
 
 これは、Android makeコンパイラー・システムにおけるコンパイル設定ファイルです。Androidコンパイラー・システムは、デバイス・フォルダー内のAndroid.mkを含め、ソース・ディレクトリー内のすべてのAndroid.mkファイルをインクルードします。 カレント・フォルダー内のすべてのmakefileファイルをこのファイルにインクルードする必要があります。Androidコンパイラーは、デバイス・フォルダー内の他のmakefileをインクルードしません。
-
+```
 LOCAL_PATH := $(call my-dir) # 设置一个 LOCAL_PATH 变量, 并将当前文件夹的路径赋值给它	
 ifeq ($(TARGET_DEVICE),thyme) # 如果 TARGET_DEVICE 变量等于 thyme	
 subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH)) # 设置一个 subdir_makefiles 变量, 并将当前文件夹下的所有 makefile 文件赋值给它	
 $(foreach mk,$(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk))) # 遍历 subdir_makefiles 变量中的所有 makefile 文件, 并 include 进来	
-endif # 结束 if 语句	
+endif # 结束 if 语句
+```
 
 # Android.bp
 
 これは、soongコンパイルシステム導入後のAndroidのコンパイル設定ファイルです。Androidのコンパイルシステムは、ソースディレクトリにある全てのAndroid.bpファイルをインクルードし、デバイスフォルダにあるAndroid.bpもインクルードします。 現時点では、外部のsoongモジュールをコンパイルする必要はありません。
+```
 soong_namespace { // soong 编译系统的命名空间	
     imports: [], // 导入的 soong 模块路径	
 }	
+```
 
 # AndroidProducts.mk
 
@@ -200,7 +215,7 @@ COMMON_LUNCH_CHOICES := \ # 定义可用的 lunch 选项
 
 これはデバイスのコンパイル・コンフィギュレーション・ファイルで、デバイスの基本情報とコンパイル・コンフィギュレーションを定義する必要がある。
 
-
+```
 Inherit common products	
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk) # 继承 core_64_bit.mk 编译配置	
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk) # 继承 full_base_telephony.mk 编译配置	
@@ -220,16 +235,17 @@ PRODUCT_MODEL := M2102J2SC # 产品型号
 PRODUCT_NAME := lineage_thyme # 产品名	
 	
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi # 产品 GMS 客户端 ID	
-
+```
 
 # BoardConfig.mk
 
 これはデバイスのボード・レベル・コンフィギュレーション・ファイルで、デバイスのハードウェア・コンフィギュレーションを定義する必要がある。
-
-
+```
 DEVICE_PATH := device/xiaomi/thyme # 定义一个 DEVICE_PATH 变量,     指向设备文件夹
+```
 
 # A/B
+```
 AB_OTA_UPDATER := true # 开启 A/B OTA 更新
 
 AB_OTA_PARTITIONS += \ # A/B OTA 更新的分区
@@ -240,8 +256,10 @@ AB_OTA_PARTITIONS += \ # A/B OTA 更新的分区
     system_ext \
     vbmeta \
     vbmeta_system
+```
 
 # Architecture
+```
 TARGET_ARCH := arm64 # 指定目标架构为 arm64
 TARGET_ARCH_VARIANT := armv8-a # 指定目标架构变体为 armv8-a
 TARGET_CPU_ABI := arm64-v8a # 指定目标 CPU ABI 为 arm64-v8a
@@ -255,11 +273,15 @@ TARGET_2ND_CPU_ABI := armeabi-v7a # 指定第二目标 CPU ABI 为 armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi # 指定第二目标 CPU ABI 2 为 armeabi
 TARGET_2ND_CPU_VARIANT := generic # 指定第二目标 CPU 变体为 generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := kryo385 # 指定第二目标 CPU 变体运行时为 kryo385
+```
 
 # Bootloader
+```
 TARGET_BOOTLOADER_BOARD_NAME := kona # 指定目标 bootloader 名为 kona, 该值可以从 MIUI 的 vendor/build.prop 中获取
+```
 
 # Kernel
+```
 BOARD_BOOT_HEADER_VERSION := 3 # 指定内核头版本为 3, 内核头版本从 3 开始支持 vendor_boot 分区
 BOARD_KERNEL_BASE := 0x00000000 # 指定内核基地址为 0x00000000
 BOARD_KERNEL_BINARIES := kernel # 指定内核二进制文件名为 kernel
@@ -289,11 +311,15 @@ ifeq ($(TARGET_PREBUILT_KERNEL),) # 如果没有使用预编译内核
   TARGET_KERNEL_CLANG_COMPILE := true # 指定使用 Clang 编译内核
   TARGET_KERNEL_SOURCE := kernel/xiaomi/thyme # 指定内核源码路径为 kernel/xiaomi/thyme
 endif
+```
 
 # Metadata
+```
 BOARD_USES_METADATA_PARTITION := true # 使用 metadata 元数据加密
+```
 
 # Partitions
+```
 BOARD_BOOTIMAGE_PARTITION_SIZE := 201326592 # 指定 boot 分区大小为 201326592
 BOARD_DTBOIMG_PARTITION_SIZE := 33554432 # 指定 dtbo 分区大小为 33554432
 BOARD_FLASH_BLOCK_SIZE := 262144 # 指定刷入块大小为 262144
@@ -310,20 +336,26 @@ $(foreach p, $(BOARD_PARTITION_LIST), $(eval BOARD_$(p)IMAGE_FILE_SYSTEM_TYPE :=
 $(foreach p, $(BOARD_PARTITION_LIST), $(eval TARGET_COPY_OUT_$(p) := $(call to-lower, $(p)))) # 遍历 BOARD_PARTITION_LIST 并赋值给 p, 然后设置 TARGET_COPY_OUT_$(p) := $(call to-lower, $(p))
 
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs # 指定 userdata 分区文件系统类型为 f2fs
+```
 
 # Platform
+```
 BOARD_USES_QCOM_HARDWARE := true # 指定使用 Qualcomm 硬件
 TARGET_BOARD_PLATFORM := kona # 指定平台为 kona
+```
 
 # Recovery
+```
 BOARD_INCLUDE_RECOVERY_DTBO := true # 指定包含 recovery DTBO
 BOARD_USES_RECOVERY_AS_BOOT := true # 指定 recovery 在 boot 分区中
 TARGET_NO_RECOVERY := true # 指定设备没有 recovery 分区
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/recovery.fstab # 指定 recovery fstab 文件
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888 # 指定 recovery 像素格式
 TARGET_USERIMAGES_USE_F2FS := true # 指定 userdata 使用 f2fs
+```
 
 # Verified Boot
+```
 BOARD_AVB_ENABLE := true # 指定启用 AVB
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3 # 指定 AVB flags 为 3
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag # 指定 AVB 为禁用
@@ -332,16 +364,18 @@ BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048 # 指定 AVB 加密算法为
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem # 指定 AVB 密钥
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP) # 指定 AVB 回滚索引
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 1 # 指定 AVB 回滚索引位置
+```
 
 # VNDK
+```
 BOARD_VNDK_VERSION := current # 指定 VNDK 版本为 current
-
+```
 
 # device.mk
 
 これはデバイスのコンパイル設定ファイルで、lineage_thyme.mkと同様に、他のコンパイル設定ファイルをインクルードしたり、コンパイルするモジュールを指定したりすることができる。
 
-
+```
 Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk) # 启用 apex 更新
 
@@ -350,45 +384,63 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk) # 启用虚
 
 Enable Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk) # 导入 6G dalvik 配置
+```
 
 # API
+```
 PRODUCT_SHIPPING_API_LEVEL := 30 # 指定预装 Android API 级别为 30, 例如 thyme 预装 Android 11, 故此处为 30
+```
 
 # A/B
+```
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
+```
 
 # Boot animation
+```
 TARGET_SCREEN_HEIGHT := 2400 # 指定屏幕高度为 2400
 TARGET_SCREEN_WIDTH := 1080 # 指定屏幕宽度为 1080
+```
 
 # Common init scripts
+```
 PRODUCT_PACKAGES += \
     init.recovery.qcom.rc # 编译额外的自定义 rc 脚本
+```
 
 # fastbootd
+```
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \ # 编译 fastbootd
     fastbootd
+```
 
 # F2FS utilities
+```
 PRODUCT_PACKAGES += \
     sg_write_buffer \ # 编译 f2fs 工具
     f2fs_io \
     check_f2fs
+```
 
 # Partitions
+```
 PRODUCT_USE_DYNAMIC_PARTITIONS := true # 指定使用动态分区
 PRODUCT_BUILD_SUPER_PARTITION := false # 指定不编译 super 分区
+```
 
 # Soong namespaces
+```
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) # 指定 soong 命名空间
+```
 
 # Update engine
+```
 PRODUCT_PACKAGES += \
     otapreopt_script \ # 编译 otapreopt 脚本
     update_engine \ # 编译 update_engine
@@ -400,25 +452,28 @@ PRODUCT_PACKAGES_DEBUG += \
 
 PRODUCT_HOST_PACKAGES += \
     brillo_update_payload \ # 编译 brillo_update_payload
+```
 
 # Vendor boot
+```
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom # 复制 fstab 到 vendor ramdisk
+```
 
 # VNDK
+```
 PRODUCT_TARGET_VNDK_VERSION := 30 # 指定 VNDK 版本为 30, 该值可以在 vendor/build.prop 中找到
-
+```
 
 # Recoveryに必要な基本ファイルのインポート
 
 これは fstab ファイルで、パーティションのマウントポイントと、読み取り可能かどうかなどのマウントポイントのプロパティを指定します。このファイルがないと、Linuxカーネルは必要なパーティションをマウントできず、AndroidやRecoveryは起動しません！
 
 このファイルは、次のコマンドを使って、ベンダパーティションで見つけることができます。
-
-
+```
 cd dump/vendor	
 find | grep fstab.qcom	
-
+```
 
 これをdeviceフォルダのrootdir/etc/ディレクトリにコピーする。
 
