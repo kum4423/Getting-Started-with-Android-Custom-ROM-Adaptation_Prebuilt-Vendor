@@ -5,7 +5,6 @@ Getting Started with Android Custom ROM Adaptation - Prebuilt Vendor
 https://blog.lynnrin.moe/posts/ROM-bringup-guide-prebuilt/#%E5%AE%8C%E5%96%84-device-tree-%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E7%BC%96%E8%AF%91-android
 
 Android Custom ROMの構築適応を始める - Prebuilt Vendor
-Android Custom ROMの構築適応を始める - Prebuilt Vendor
 
 * 快速上手 Android Custom ROM 适配 - Prebuilt Vendor
     * 什么是 Prebuilt Vendor, 为什么要用 Prebuilt Vendor
@@ -483,13 +482,17 @@ https://github.com/Lynnrin-Studio/android_device_xiaomi_thyme/commit/cce87ffbd14
 # Recoveryのコンパイル開始
 
 それができたら、リカバリーのコンパイルを始めてテストしよう。
+```
 . build/envsetup.sh # 初始化编译环境	
 lunch lineage_thyme-userdebug # 初始化设备编译环境	
-m bootimage # 编译 boot image, 由于是 A/B 设备, 故此处编译 boot image 而不是 recovery image	
+m bootimage # 编译 boot image, 由于是 A/B 设备, 故此处编译 boot image 而不是 recovery image
+```
 
 コンパイル完了後、デバイスをフラッシュする
+```
 fastboot flash boot out/target/product/thyme/boot.img # 刷入 boot image	
-fastboot reboot recovery # 重启到 recovery	
+fastboot reboot recovery # 重启到 recovery
+```
 
 コンパイル後、デバイスがリカバリーに移行できれば次のステップに進むことができるが、そうでなければ記事の最後にあるデバッグ・ガイドを参照してデバッグを行ってほしい。
 
