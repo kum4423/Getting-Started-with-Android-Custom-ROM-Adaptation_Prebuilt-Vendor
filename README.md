@@ -93,24 +93,34 @@ PT、GRFの導入後、Vendorを純正ROMで直接使用することができ、
 
 必要なライブラリパッケージのインストール
 安装编译依赖	
-sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libelf-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev git	
+```
+sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libelf-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev git
+```
 	
 配置 repo	
+```
 sudo curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/bin/repo	
-sudo chmod a+x /usr/bin/repo	
+sudo chmod a+x /usr/bin/repo
+```
 
 # LineageOSソースコードの同期
 
 デバイス適応の初期段階では、LineageOSを使ってデバイスを立ち上げることをお勧めする。
-新建文件夹用于存放源码	
+
+新建文件夹用于存放源码
+```
 mkdir lineage	
-	
-初始化 repo	
+```	
+初始化 repo
+```
 repo init -u https://github.com/LineageOS/android.git -b lineage-19.1 # 同步完整仓库, 带提交历史, 占用空间大	
 repo init -u https://github.com/LineageOS/android.git -b lineage-19.1 --depth=1 # 仅拉取最新提交, 不带提交历史, 占用空间小	
-	
-开始同步	
+```
+开始同步
+
+```
 repo sync	
+```
 
 # 適応開始
 
