@@ -645,5 +645,23 @@ GoogleはAndroid 13でBluetoothを含むいくつかのコンポーネントを�
 2. https://github.com/Lynnrin-Studio/android_device_xiaomi_nabu/commit/b26c98951d1e8c0397983ed4f96224bd9e836489
 3. https://github.com/Lynnrin-Studio/android_device_xiaomi_nabu/commits/arrow-13.0/bluetooth/audio
 
-# オーディオ
+# Audio
+
+デバイスによってはlibvolumelistenerがメーカーによって変更されている可能性があるので、このコミットでlibvolumelistenerを置き換える必要がある。
+- https://github.com/Lynnrin-Studio/android_device_xiaomi_nabu/commit/27e74adfbc30444380e471841957c56b74ffb79b
+
+# デバッグ・ガイド
+
+## デバイスが純正ロゴで止まっている（1つの画面で止まっている）
+これにはさまざまな理由がある。
+
+## データパーティションが正しくフォーマットされていない
+1. リカバリーでデータパーティションをフォーマットしてみる
+2. fastboot -wでデータパーティションをフォーマットしてみる
+3. 純正リカバリーを使用してデータパーティションをフォーマットしてみる
+4. fstabでデータパーティションの暗号化をオフにする
+
+## Sepolicyルールの設定ミス
+1. SELinuxの状態をpermissiveに設定してみる
+2. logcatまたはpstoreのログを取得し、関連するエラーをチェックし、そのエラーを修正する
 
