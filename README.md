@@ -544,6 +544,7 @@ MediaTek デバイスについては、bootctrlとmtk_plpath_utilsを参照し�
 # VoLTE
 
 VoLTEをサポートするためには、いくつかのビルドをコンパイルし、純正システムからいくつかのファイルを抽出する必要がある。
+
 Qualcomm デバイスリファレンス:
 
 - https://github.com/Lynnrin-Studio/android_device_xiaomi_thyme/commit/e6d415fbc9c1ad947ceea4e2860a7a1101e8feec
