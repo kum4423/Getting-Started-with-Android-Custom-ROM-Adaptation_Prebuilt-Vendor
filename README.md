@@ -581,6 +581,7 @@ Overlayの設定の一部は、ベンダーのシステムから次の場所で�
 SELinuxは、一部の悪意のあるアプリがシステムファイルを読み取るのを防ぐセキュリティ・メカニズムだが、このメカニズムは、間違ったSepolicyルールが一部のハードウェアやソフトウェアを不適切に動作させるなど、いくつかの問題にもつながる可能性がある。 しかし、この仕組みは、例えば間違ったSepolicyルールが一部のハードウェアやソフトウェアを不適切に動作させるなど、いくつかの問題にもつながる可能性がある。適応の初期段階では、SELinuxをToleranceに設定し、ハードウェアとソフトウェアの適応作業が基本的に完了するまで待ってから、SELinuxをEnforcingに設定することをお勧めする。
 
 Sepolicyのルールの作成については、以下のリンクを参照してください:
-- https://source.android.com/security/selinux/
-- https://www.cnblogs.com/schips/p/android-selinux_about_avc.html
-- https://lineageos.org/engineering/HowTo-SELinux
+
+1. https://source.android.com/security/selinux/
+2. https://www.cnblogs.com/schips/p/android-selinux_about_avc.html
+3. https://lineageos.org/engineering/HowTo-SELinux
