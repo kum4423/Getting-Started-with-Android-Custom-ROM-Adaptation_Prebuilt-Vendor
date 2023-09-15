@@ -525,14 +525,14 @@ FCM 或いは manifest.xml 或いは compatibility_matrix.device.xml
 bootctrl および gpt-utils または mtk_plpath_utils
 これらのモジュールは、A/Bデバイスの非破壊アップグレードに必要である。詳細はAOSPの公式ドキュメントを参照されたい： https://source.android.com/docs/core/ota/ab
 ```
-⚠️ 注意: QualcommデバイスはMediaTekデバイスとは異なるbootctrlを使用します。
+⚠️ 注：QualcommデバイスはMediaTekデバイスとは異なるbootctrlを使用します。
 ```
 クアルコムデバイス用のbootctrlとgpt-utilsはCAFまたはCLOから取得できます。
 
 1. CAF
 2. CLO
 ```
-⚠️ 注意: Qualcommは2022年5月31日にCAFの更新を停止し、2023年5月31日にCAFの使用を完全に停止することを決定したため、CLOからbootctrlとgpt-utilsを使用することを推奨します。
+⚠️ 注：Qualcommは2022年5月31日にCAFの更新を停止し、2023年5月31日にCAFの使用を完全に停止することを決定したため、CLOからbootctrlとgpt-utilsを使用することを推奨します。
 ```
 MediaTek デバイスについては、bootctrlとmtk_plpath_utilsを参照してください。
 
@@ -592,11 +592,38 @@ Sepolicyのルールの作成については、以下のリンクを参照して
 
 # 画面下の指紋
 ```
-⚠️ 注記：このセクションでは、光学式画面下指紋認証、グローバルHBMを使用するXiaomi 10Sを例にしています。お使いのデバイスがローカルHBMの場合、実装が若干異なる可能性があります。
+⚠️ 注：このセクションでは、光学式画面下指紋認証、グローバルHBMを使用するXiaomi 10Sを例にしています。お使いのデバイスがローカルHBMの場合、実装が若干異なる可能性があります。
 ```
 Xiaomi Mi 10Sでは、アンダースクリーンフィンガープリントを使用しているため、ベンダーにコンパイルされているFingerprint 2.1 HALを直接使用することはできません。Android 12以上では、UDFPSイベントを処理するためにFingerprint 2.3 HALを手動でコンパイルする必要があります。Android 12以上では、UDFPSイベントを処理するためにFingerprint 2.3 HALを手動でコンパイルする必要があります。
 
 UDFPSはGoogleがAndroid 12で新たに実装した画面下指紋で、ソースコードを読むことができる。
-https://cs.android.com/android/platform/superproject/+/master:frameworks/base/packages/SystemUI/src/com/android/systemui/biometrics/
+- https://cs.android.com/android/platform/superproject/+/master:frameworks/base/packages/SystemUI/src/com/android/systemui/biometrics/
 
-Android 12以下のシステム
+## Android 12以下のシステム
+正確な実装は、以下のコミット履歴を参照してください。
+- https://github.com/Lynnrin-Studio/android_device_xiaomi_thyme/commits/lineage-18.1/fod
+```
+⚠️ 注：
+Xiaomi 10SはGlobal HBMを使用しているため、カーネル調光またはフレームワーク調光を行う必要がある。
+そうしないと、指紋ロック解除を使用する際に全画面の輝度が最大に設定されてしまう。
+Xiaomi 10Sはprebuilt kernelを使用しているため、フレームワークを使用することしかできない。
+Xiaomi 10Sはprebuilt kernelを使用しているため、調光にはフレームワークしか使用できない。
+https://github.com/dataoutputstream/platform_frameworks_base/commit/86a2a0901b8af99019996286decbc6510f77e375
+```
+
+## Android 12以上のシステム
+実装は以下のコミット履歴にある。
+- https://github.com/Lynnrin-Studio/android_device_xiaomi_thyme/commit/a681ba360b31fd7103f1323926c5561fcd13c5a4
+さらに、画面下の指紋認証機能を正しく動作させるために、オーバーレイにいくつかのパラメータを設定する必要がある。
+- https://github.com/Lynnrin-Studio/android_device_xiaomi_thyme/commit/263342af84e43838bfe37f8b3ad24c6f14659125
+```
+⚠️ 注：
+Xiaomi 10SはGlobal HBMを使用しているため、カーネル調光かフレームワーク調光を行う必要がある。
+そうしないと、指紋認証でロック解除するときに全画面の輝度が最大に設定されてしまう。
+Xiaomi 10Sはプリビルドカーネルを使用しているため、フレームワークでしかできない。
+調光の実装については、こちらのコミットを参照してください
+https://review.arrowos.net/c/ArrowOS/android_frameworks_base/+/16767
+⚠️ 注：
+Android 13ではUDFPS部分がKotlinで書き換えられているため、上記の実装はAndroid 13と互換性がありません。
+https://github.com/PixelExperience-Devices/kernel_xiaomi_thyme/commits/53248741c3a24008a440e55cb96869d7c26136e9
+```
