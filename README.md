@@ -665,3 +665,24 @@ GoogleはAndroid 13でBluetoothを含むいくつかのコンポーネントを�
 1. SELinuxの状態をpermissiveに設定してみる
 2. logcatまたはpstoreのログを取得し、関連するエラーをチェックし、そのエラーを修正する
 
+## vender imageが正しく設定されていない
+1. BoardConfig でvendor imageが正しく設定されていることを確認します
+
+## ramdiskが正しく設定されていない
+1. fstabがramdiskに正しくコピーされていることを確認する
+
+## kernelが正しく設定されていないか、ビルド済みkernelが利用できない
+1. カーネルが正しく設定されているか確認する
+2. OSSカーネルに切り替える
+
+## BPFローディングの失敗
+以下のコミットを使用して、BPFロードの問題を修正してみてください
+- Prebuilt kernel
+1. https://github.com/AcmeUI/android_frameworks_libs_net/commit/6fcad94ca26fbcf17ae33fca864ab80bf2b1d642
+2. https://github.com/AcmeUI/android_system_bpf/commit/50a4dece82954745e40b5d354cfd222642f6fdce
+3. https://github.com/AcmeUI/android_frameworks_libs_net/commit/08de55ee6bb3774123ed8bd303855c542093ebb4
+
+- OSS kernel
+1. https://github.com/PixelExperience-Devices/kernel_xiaomi_thyme/commit/f1facc1aa372dd2c9eb1336d57e574ace2cbfec7
+
+# logcatまたはpstoreのログを取得する
