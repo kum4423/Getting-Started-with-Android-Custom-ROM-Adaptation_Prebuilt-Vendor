@@ -524,16 +524,16 @@ FCM 或いは manifest.xml 或いは compatibility_matrix.device.xml
 これはHALマニフェストファイルであり、デバイスがサポートするHALとそのバージョンを指定します。 Androidはマニフェスト内のHALに従って対応するHALをロードします。 詳細は公式AOSPドキュメントを参照してください: https://source.android.com/docs/core/architecture/vintf?hl=ja
 bootctrl および gpt-utils または mtk_plpath_utils
 これらのモジュールは、A/Bデバイスの非破壊アップグレードに必要である。詳細はAOSPの公式ドキュメントを参照されたい： https://source.android.com/docs/core/ota/ab
-
-    ⚠️ 注意: QualcommデバイスはMediaTekデバイスとは異なるbootctrlを使用します。
-
+```
+⚠️ 注意: QualcommデバイスはMediaTekデバイスとは異なるbootctrlを使用します。
+```
 クアルコムデバイス用のbootctrlとgpt-utilsはCAFまたはCLOから取得できます。
 
 1. CAF
 2. CLO
-
-    ⚠️ 注意: Qualcommは2022年5月31日にCAFの更新を停止し、2023年5月31日にCAFの使用を完全に停止することを決定したため、CLOからbootctrlとgpt-utilsを使用することを推奨します。
-
+```
+⚠️ 注意: Qualcommは2022年5月31日にCAFの更新を停止し、2023年5月31日にCAFの使用を完全に停止することを決定したため、CLOからbootctrlとgpt-utilsを使用することを推奨します。
+```
 MediaTek デバイスについては、bootctrlとmtk_plpath_utilsを参照してください。
 
 1. bootctrl
