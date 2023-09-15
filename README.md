@@ -588,3 +588,15 @@ Sepolicyのルールの作成については、以下のリンクを参照して
 
 # ハードウェア機能の修理
 
+一般的に、 prebuilt vendor treeによってコンパイルされたROMは、ほとんどのハードウェアで動作しますが、一部のモデルでは、指紋認証やLED indicatorなど、ハードウェアが正しく動作するためにいくつかの追加修正が必要になる場合があります。
+
+# 画面下の指紋
+```
+⚠️ 注記：このセクションでは、光学式画面下指紋認証、グローバルHBMを使用するXiaomi 10Sを例にしています。お使いのデバイスがローカルHBMの場合、実装が若干異なる可能性があります。
+```
+Xiaomi Mi 10Sでは、アンダースクリーンフィンガープリントを使用しているため、ベンダーにコンパイルされているFingerprint 2.1 HALを直接使用することはできません。Android 12以上では、UDFPSイベントを処理するためにFingerprint 2.3 HALを手動でコンパイルする必要があります。Android 12以上では、UDFPSイベントを処理するためにFingerprint 2.3 HALを手動でコンパイルする必要があります。
+
+UDFPSはGoogleがAndroid 12で新たに実装した画面下指紋で、ソースコードを読むことができる。
+https://cs.android.com/android/platform/superproject/+/master:frameworks/base/packages/SystemUI/src/com/android/systemui/biometrics/
+
+Android 12以下のシステム
