@@ -529,15 +529,15 @@ bootctrl および gpt-utils または mtk_plpath_utils
 
 クアルコムデバイス用のbootctrlとgpt-utilsはCAFまたはCLOから取得できます。
 
-   - 1.CAF
-   - 2.CAF
+   - CAF
+   - CAF
 
     ⚠️ 注意: Qualcommは2022年5月31日にCAFの更新を停止し、2023年5月31日にCAFの使用を完全に停止することを決定したため、CLOからbootctrlとgpt-utilsを使用することを推奨します。
 
 MediaTek デバイスについては、bootctrlとmtk_plpath_utilsを参照してください。
 
-- 1.bootctrl
-- 2.mtk_plpath_utils
+- bootctrl
+- mtk_plpath_utils
 
 上記の2つのモジュールがMediaTekデバイスで動作しない場合は、ビルド済みのbootctrlとmtk_plpath_utilsの使用を検討してください。
 
@@ -546,13 +546,13 @@ MediaTek デバイスについては、bootctrlとmtk_plpath_utilsを参照し�
 VoLTEをサポートするためには、いくつかのビルドをコンパイルし、純正システムからいくつかのファイルを抽出する必要がある。
 Qualcomm デバイスリファレンス:
 
-https://github.com/Lynnrin-Studio/android_device_xiaomi_thyme/commit/e6d415fbc9c1ad947ceea4e2860a7a1101e8feec
-https://github.com/Lynnrin-Studio/android_device_xiaomi_thyme/blob/twelve/proprietary-files.txt#L78-L87
+- https://github.com/Lynnrin-Studio/android_device_xiaomi_thyme/commit/e6d415fbc9c1ad947ceea4e2860a7a1101e8feec
+- https://github.com/Lynnrin-Studio/android_device_xiaomi_thyme/blob/twelve/proprietary-files.txt#L78-L87
 
 MediaTek デバイスリファレンス:
 
-https://github.com/Lynnrin-Studio/android_device_xiaomi_chopin/blob/lineage-18.1/device.mk#L105-L121
-https://github.com/Lynnrin-Studio/android_device_xiaomi_chopin/blob/lineage-18.1/proprietary-files.txt#L5-L41
+- https://github.com/Lynnrin-Studio/android_device_xiaomi_chopin/blob/lineage-18.1/device.mk#L105-L121
+- https://github.com/Lynnrin-Studio/android_device_xiaomi_chopin/blob/lineage-18.1/proprietary-files.txt#L5-L41
 
 また、ROMがMTK IMSサポートでコンパイルされていることを確認してください: https://gerrit.pixelexperience.org/q/topic:mtk-ims
 
