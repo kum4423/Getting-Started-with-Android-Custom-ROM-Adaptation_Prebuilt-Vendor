@@ -525,16 +525,16 @@ FCM 或いは manifest.xml 或いは compatibility_matrix.device.xml
 bootctrl および gpt-utils または mtk_plpath_utils
 これらのモジュールは、A/Bデバイスの非破壊アップグレードに必要である。詳細はAOSPの公式ドキュメントを参照されたい： https://source.android.com/docs/core/ota/ab
 
-    ⚠️ 注意：Qualcomm デバイスは MediaTek デバイスとは異なる bootctrl を使用します。
+    ⚠️ 注意: QualcommデバイスはMediaTekデバイスとは異なるbootctrlを使用します。
 
-クアルコムデバイス用の bootctrl と gpt-utils は CAF または CLO から取得できます。
+クアルコムデバイス用のbootctrlとgpt-utilsはCAFまたはCLOから取得できます。
 
    - 1.CAF
    - 2.CAF
 
     ⚠️ 注意: Qualcommは2022年5月31日にCAFの更新を停止し、2023年5月31日にCAFの使用を完全に停止することを決定したため、CLOからbootctrlとgpt-utilsを使用することを推奨します。
 
-MediaTek デバイスについては、bootctrl と mtk_plpath_utils を参照してください。
+MediaTek デバイスについては、bootctrlとmtk_plpath_utilsを参照してください。
 
 - 1.bootctrl
 - 2.mtk_plpath_utils
@@ -554,6 +554,6 @@ MediaTek デバイスリファレンス:
 https://github.com/Lynnrin-Studio/android_device_xiaomi_chopin/blob/lineage-18.1/device.mk#L105-L121
 https://github.com/Lynnrin-Studio/android_device_xiaomi_chopin/blob/lineage-18.1/proprietary-files.txt#L5-L41
 
-また、ROMがMTK IMSサポートでコンパイルされていることを確認してください:https://gerrit.pixelexperience.org/q/topic:mtk-ims
+また、ROMがMTK IMSサポートでコンパイルされていることを確認してください: https://gerrit.pixelexperience.org/q/topic:mtk-ims
 
 # Overlay
