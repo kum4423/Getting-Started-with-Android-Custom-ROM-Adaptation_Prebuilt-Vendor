@@ -585,3 +585,6 @@ Sepolicyのルールの作成については、以下のリンクを参照して
 1. https://source.android.com/security/selinux/
 2. https://www.cnblogs.com/schips/p/android-selinux_about_avc.html
 3. https://lineageos.org/engineering/HowTo-SELinux
+
+# ハードウェア機能の修理
+
