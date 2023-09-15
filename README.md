@@ -8,8 +8,6 @@ Getting Started with Android Custom ROM Adaptation - Prebuilt Vendor
      height="80">]()
 
 ---    
-Android Custom ROMの構築適応を始める - Prebuilt Vendor
-
 * 快速上手 Android Custom ROM 适配 - Prebuilt Vendor
     * 什么是 Prebuilt Vendor, 为什么要用 Prebuilt Vendor
     * 需要准备的东西
