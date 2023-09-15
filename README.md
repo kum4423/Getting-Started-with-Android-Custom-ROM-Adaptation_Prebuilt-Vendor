@@ -529,15 +529,15 @@ bootctrl および gpt-utils または mtk_plpath_utils
 
 クアルコムデバイス用のbootctrlとgpt-utilsはCAFまたはCLOから取得できます。
 
-   - CAF
-   - CAF
+   1. CAF
+   2. CLO
 
     ⚠️ 注意: Qualcommは2022年5月31日にCAFの更新を停止し、2023年5月31日にCAFの使用を完全に停止することを決定したため、CLOからbootctrlとgpt-utilsを使用することを推奨します。
 
 MediaTek デバイスについては、bootctrlとmtk_plpath_utilsを参照してください。
 
-- bootctrl
-- mtk_plpath_utils
+1. bootctrl
+2. mtk_plpath_utils
 
 上記の2つのモジュールがMediaTekデバイスで動作しない場合は、ビルド済みのbootctrlとmtk_plpath_utilsの使用を検討してください。
 
@@ -575,4 +575,5 @@ Overlayの設定の一部は、ベンダーのシステムから次の場所で�
 
 さらにオーバーレイを見つける必要がある場合は、[cs.android.com](https://cs.android.com/)
 に行き、対応するアプリモジュールのres/values/ディレクトリを見ることができます。
+
 
