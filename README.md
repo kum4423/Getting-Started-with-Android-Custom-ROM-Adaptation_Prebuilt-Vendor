@@ -557,3 +557,22 @@ MediaTek デバイスリファレンス:
 また、ROMがMTK IMSサポートでコンパイルされていることを確認してください: https://gerrit.pixelexperience.org/q/topic:mtk-ims
 
 # Overlay
+
+Overlayは、ステータスバーの高さや角丸の大きさなど、いくつかのシステム機能を動的に調整するために非常に重要なものです。
+
+Overlayの設定の一部は、ベンダーのシステムから次の場所で抽出できます。
+```
+  vendor/overlay
+  product/overlay
+```
+
+独自のオーバーレイを追加する必要がある場合は、これらのリンクを参照して、利用可能なオーバーレイを確認することができます:
+```
+  framework/base
+  framework/base/packages/SystemUI
+  packages/apps/Settings
+```
+
+さらにオーバーレイを見つける必要がある場合は、[cs.android.com](https://cs.android.com/)
+に行き、対応するアプリモジュールのres/values/ディレクトリを見ることができます。
+
