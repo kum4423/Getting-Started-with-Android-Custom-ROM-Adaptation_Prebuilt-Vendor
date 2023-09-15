@@ -628,3 +628,22 @@ https://review.arrowos.net/c/ArrowOS/android_frameworks_base/+/16767
 Android 13ではUDFPS部分がKotlinで書き換えられているため、上記の実装はAndroid 13と互換性がありません。
 https://github.com/PixelExperience-Devices/kernel_xiaomi_thyme/commits/53248741c3a24008a440e55cb96869d7c26136e9
 ```
+
+# Bluetooth Audio
+
+## Android 12以下のシステム
+通常、純正システムはQCOM BTを使用しているため、このコミットで説明されているように、vendorのQCOM BTをサポートするためにいくつかの変更を行う必要があります。
+- https://github.com/Lynnrin-Studio/android_device_xiaomi_thyme/commit/ae9c7040b68d9904c55bf5ce810f5ce8a3212662
+
+## Android 13
+GoogleはAndroid 13でBluetoothを含むいくつかのコンポーネントをモジュール化したが、vendorのQCOM BTはこの変更に対応していないため、
+"android.hardware.bluetooth.audio"の修正版をコンパイルしてQCOM BTを無効にし、AOSP BTに切り替える必要がある。
+
+具体的な実装については、これらのコミットを参照のこと:
+
+1. https://review.arrowos.net/q/topic:13-gsi
+2. https://github.com/Lynnrin-Studio/android_device_xiaomi_nabu/commit/b26c98951d1e8c0397983ed4f96224bd9e836489
+3. https://github.com/Lynnrin-Studio/android_device_xiaomi_nabu/commits/arrow-13.0/bluetooth/audio
+
+# オーディオ
+
