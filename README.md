@@ -529,8 +529,8 @@ bootctrl および gpt-utils または mtk_plpath_utils
 
 クアルコムデバイス用のbootctrlとgpt-utilsはCAFまたはCLOから取得できます。
 
-   1. CAF
-   2. CLO
+1. CAF
+2. CLO
 
     ⚠️ 注意: Qualcommは2022年5月31日にCAFの更新を停止し、2023年5月31日にCAFの使用を完全に停止することを決定したため、CLOからbootctrlとgpt-utilsを使用することを推奨します。
 
