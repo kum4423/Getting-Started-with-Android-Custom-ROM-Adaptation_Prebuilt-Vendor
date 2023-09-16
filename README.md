@@ -589,11 +589,12 @@ Sepolicyのルールの作成については、以下のリンクを参照して
 
 一般的に、 prebuilt vendor treeによってコンパイルされたROMは、ほとんどのハードウェアで動作しますが、一部のモデルでは、指紋認証やLED indicatorなど、ハードウェアが正しく動作するためにいくつかの追加修正が必要になる場合があります。
 
-# 画面下の指紋
+# 画面下指紋認証
 ```
 ⚠️ 注：このセクションでは、光学式画面下指紋認証、グローバルHBMを使用するXiaomi 10Sを例にしています。お使いのデバイスがローカルHBMの場合、実装が若干異なる可能性があります。
 ```
-Xiaomi Mi 10Sでは、アンダースクリーンフィンガープリントを使用しているため、ベンダーにコンパイルされているFingerprint 2.1 HALを直接使用することはできません。Android 12以上では、UDFPSイベントを処理するためにFingerprint 2.3 HALを手動でコンパイルする必要があります。Android 12以上では、UDFPSイベントを処理するためにFingerprint 2.3 HALを手動でコンパイルする必要があります。
+Xiaomi Mi 10Sでは、画面下指紋認証を使用しているため、vendorにコンパイルされているFingerprint 2.1 HALを直接使用することはできません。
+Android 12以上では、UDFPSイベントを処理するためにFingerprint 2.3 HALを手動でコンパイルする必要があります。
 
 UDFPSはGoogleがAndroid 12で新たに実装した画面下指紋で、ソースコードを読むことができる。
 - https://cs.android.com/android/platform/superproject/+/master:frameworks/base/packages/SystemUI/src/com/android/systemui/biometrics/
@@ -619,7 +620,7 @@ https://github.com/dataoutputstream/platform_frameworks_base/commit/86a2a0901b8a
 ⚠️ 注：
 Xiaomi 10SはGlobal HBMを使用しているため、カーネル調光かフレームワーク調光を行う必要がある。
 そうしないと、指紋認証でロック解除するときに全画面の輝度が最大に設定されてしまう。
-Xiaomi 10Sはプリビルドカーネルを使用しているため、フレームワークでしかできない。
+Xiaomi 10Sはprebuilt kernelを使用しているため、フレームワークでしかできない。
 調光の実装については、こちらのコミットを参照してください
 https://review.arrowos.net/c/ArrowOS/android_frameworks_base/+/16767
 ⚠️ 注：
@@ -654,7 +655,7 @@ GoogleはAndroid 13でBluetoothを含むいくつかのコンポーネントを�
 これにはさまざまな理由がある。
 
 ## データパーティションが正しくフォーマットされていない
-1. リカバリーでデータパーティションをフォーマットしてみる
+1. recoveryでデータパーティションをフォーマットしてみる
 2. fastboot -wでデータパーティションをフォーマットしてみる
 3. 純正リカバリーを使用してデータパーティションをフォーマットしてみる
 4. fstabでデータパーティションの暗号化をオフにする
@@ -664,14 +665,14 @@ GoogleはAndroid 13でBluetoothを含むいくつかのコンポーネントを�
 2. logcatまたはpstoreのログを取得し、関連するエラーをチェックし、そのエラーを修正する
 
 ## vender imageが正しく設定されていない
-1. BoardConfig でvendor imageが正しく設定されていることを確認します
+1. BoardConfigでvendor imageが正しく設定されていることを確認します
 
 ## ramdiskが正しく設定されていない
 1. fstabがramdiskに正しくコピーされていることを確認する
 
-## kernelが正しく設定されていないか、ビルド済みkernelが利用できない
-1. カーネルが正しく設定されているか確認する
-2. OSSカーネルに切り替える
+## kernelが正しく設定されていないか、build済みkernelが利用できない
+1. kernelが正しく設定されているか確認する
+2. OSS kernelに切り替える
 
 ## BPFローディングの失敗
 以下のコミットを使用して、BPFロードの問題を修正してみてください
@@ -696,8 +697,8 @@ error、crash、fatalなどのキーワードでlogcatログをチェックす�
 ```
 ⚠️ 注：pstoreはカーネルで有効になっている必要がある。有効になっていないと、pstoreのログを取得できない。
 ```
-1. デバイスをリカバリに再起動する
-2. リカバリーのためにadbを有効にする（まだ有効になっていない場合）
+1. デバイスをrecoveryに再起動する
+2. recoveryのためにadbを有効にする（まだ有効になっていない場合）
 3. adb pull /sys/fs/pstoreを使ってpstoreのログを取得する
 
 error、crash、fatalなどのキーワードでpstoreのログをチェックすることで、問題を突き止めることができる。
@@ -705,7 +706,7 @@ error、crash、fatalなどのキーワードでpstoreのログをチェック�
 
 ## デバイスが起動アニメーションで固まる（2つの画面で固まる）
 
-デバイスカードの2番目の画面は、システムが起動し、カーネル部分は正常に動作しているが、システムサービスが正常に開始されていないことを意味する。
+デバイスカードの2番目の画面は、システムが起動し、kernel部分は正常に動作しているが、システムサービスが正常に開始されていないことを意味する。
 
 ## logcatログにlinker・エラー
 
